@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Static Google Map</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<html>
+    <head>
+        <!-- Main Quill library -->
+        <script src="//cdn.quilljs.com/1.1.6/quill.js"></script>
+        <!-- Theme included stylesheets -->
+        <link href="//cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
+        <link href="//cdn.quilljs.com/1.1.6/quill.bubble.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
@@ -15,50 +17,44 @@
             margin-right: auto;
         }
     </style>
-</head>
-
-<body>
-
-    <div class="container">
+	    
+    </head>
+    <body>
+      	 <div class="container">
         <form class="form-horizontal">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Configure Map Parameters</legend>
+                <legend>Configure Image & Text Parameters</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="mapCentre">Map Centre</label>
+                    <label class="col-md-4 control-label" for="ImageURL">Image URL</label>
                     <div class="col-md-4">
-                        <input id="mapCentre" name="mapCentre" type="text" placeholder="Map Centre" class="form-control input-md" required="" value="London, UK">
+                        <input id="ImageURL" name="ImageURL" type="text" placeholder="Image URL" class="form-control input-md" required="" value="http://image.s4.exct.net/lib/fe8f15737c62077a76/m/1/a9836fc9-54dc-434a-a09f-2b2ca88ce146.png">
 
                     </div>
                 </div>
 
-                <!-- Text input-->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="mapWidth">Width</label>
-                    <div class="col-md-2">
-                        <input id="mapWidth" name="mapWidth" type="text" placeholder="Width" class="form-control input-md" required="" value="600">
-
-                    </div>
-                </div>
-
+      
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="mapHeight">Height</label>
                     <div class="col-md-2">
-                        <input id="mapHeight" name="mapHeight" type="text" placeholder="Height" class="form-control input-md" required="" value="300">
+                        <input id="ImgHeight" name="ImgHeight" type="text" placeholder="Height" class="form-control input-md" required="" value="400">
 
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="mapZoom">Zoom</label>
-                    <div class="col-md-2">
-                        <input id="mapZoom" name="mapZoom" type="text" placeholder="Zoom" class="form-control input-md" required="" value="13">
-
+                    <label class="col-md-4 control-label" for="Text">Text</label>
+                    <div class="col-md-4">
+                        <div id="standalone-container">
+ 
+                          <div id="editor-container"></div>
+                        </div>
+						
                     </div>
                 </div>
 
@@ -69,14 +65,6 @@
     </form>
 
     </div>
-
-    <script src="/blocksdk.js"></script>
-    <script src="/mainApp.js"></script>
-
-
-    <script>
-    </script>
-
-</body>
-
+        <script src="main.js"></script>
+    </body>
 </html>
