@@ -69,9 +69,8 @@ let fetchData = () => {
 }
 //sdk.defaultContent(defaultContent);
 
-sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
+//sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
+sdk.setSuperContent(defaultContent);
 
 window.onload = fetchData;
 window.onchange = saveData;
-
-
