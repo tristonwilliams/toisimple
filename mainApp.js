@@ -66,7 +66,7 @@ let fetchData = () => {
 		else{
 		sdk.setContent(defaultContent);
 		
-		};
+		}
     });
 
     console.log(JSON.stringify(imgData));
