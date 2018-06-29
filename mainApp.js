@@ -1,4 +1,4 @@
-l// if (window.self === window.top) {
+// if (window.self === window.top) {
 //     document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder only!';;
 // }
 
