@@ -58,18 +58,19 @@ let fetchData = () => {
       document.getElementById('ImageURL').value = imgData.ImageURL;
     document.getElementById('Text').value = imgData.Text;
 	document.getElementById('Textcolor').value = imgData.Textcolor;
+	
+			
 			
      
         }
-		
     });
 
     console.log(JSON.stringify(imgData));
 }
 
+//sdk.setContent(defaultContent);
+
+//sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
 
 window.onload = fetchData;
 window.onchange = saveData;
-
-
-
