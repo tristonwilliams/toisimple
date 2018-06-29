@@ -1,7 +1,3 @@
-// if (window.self === window.top) {
-//     document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder only!';;
-// }
-
 let sdk = new window.sfdc.BlockSDK(); //initalize SDK
 
 let imgData = {
