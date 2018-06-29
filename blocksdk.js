@@ -1,130 +1,77 @@
-/* 
- * Copyright (c) 2018, salesforce.com, inc.
- * All rights reserved.
- * Licensed under the BSD 3-Clause license. 
- * For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
- */
+// if (window.self === window.top) {
+//     document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder only!';;
+// }
 
-var SDK = function (whitelistOverride, sslOverride) {
+let sdk = new window.sfdc.BlockSDK(); //initalize SDK
 
-	// the custom block should verify it is being called from
-	// the marketing cloud
-	this._validateOrigin = function (origin) {
-		// Make sure to escape periods since these strings are used in a regular expression
-		var allowedDomains = whitelistOverride || ['marketingcloudapps\\.com', 'blocktester\\.herokuapp\\.com'];
-		for (var i = 0; i < allowedDomains.length; i++) {
-			// Makes the s optional in https
-			var optionalSsl = sslOverride ? '?' : '';
-			var whitelistRegex = new RegExp('^https' + optionalSsl + '://([a-zA-Z0-9-]+\\.)*' + allowedDomains[i] + '(:[0-9]+)?$', 'i');
-			if (whitelistRegex.test(origin)) {
-				return true;
-			}
-		}
+let imgData = {
+   
+    ImageURL: 'http://image.s4.exct.net/lib/fe8f15737c62077a76/m/1/a9836fc9-54dc-434a-a09f-2b2ca88ce146.png',
+    ImgHeight: 400,
+    Text: 'Text Over Image',
+	Textcolor: '#000000',
+	
 
-		return false;
-	};
-
-	this._messageId = 1;
-	this._messages = {
-		0: function () {}
-	};
-
-	this._receiveMessage = function (message) {
-		message = message || {};
-		var data = message.data || {};
-		if (data.method === 'handShake') {
-			if (this._validateOrigin(data.origin)) {
-				this._parentOrigin = data.origin;
-				return;
-			}
-		}
-		// if the message is not from the validated origin it gets ignored
-		if (!this._parentOrigin || this._parentOrigin !== message.origin) {
-			return;
-		}
-		// when the message has been received, we execute its callback
-		(this._messages[data.id || 0] || function () {})(data.payload);
-		delete this._messages[data.id];
-	};
-
-	window.addEventListener('message', this._receiveMessage.bind(this), false);
-
-	this._postToEditor = function (payload, callback, ttl) {
-		var self = this;
-		// we only message up if we have
-		// validated the origin
-		if (!this._parentOrigin) {
-			if (ttl === undefined || ttl > 0) {
-				window.setTimeout(function () {
-					self._postToEditor(payload, callback, (ttl || 5) - 1);
-				}, 20);
-			}
-			return;
-		}
-		this._messages[this._messageId] = callback;
-		payload.id = this._messageId;
-		this._messageId += 1;
-		// the actual postMessage always uses
-		// the validated origin
-		window.parent.postMessage(payload, this._parentOrigin);
-	};
-
-	this.getContent = function (cb) {
-		this._postToEditor({
-			method: 'getContent'
-		}, cb);
-	};
-
-	this.setContent = function (content, cb) {
-		this._postToEditor({
-			method: 'setContent',
-			payload: content
-		}, cb);
-	};
-
-	this.setSuperContent = function (content, cb) {
-		this._postToEditor({
-			method: 'setSuperContent',
-			payload: content
-		}, cb);
-	};
-
-	this.getData = function (cb) {
-		this._postToEditor({
-			method: 'getData'
-		}, cb);
-	};
-
-	this.setData = function (dataObj, cb) {
-		this._postToEditor({
-			method: 'setData',
-			payload: dataObj
-		}, cb);
-	};
-
-	this.getCentralData = function (cb) {
-		this._postToEditor({
-			method: 'getCentralData'
-		}, cb);
-	};
-
-	this.setCentralData = function (dataObj, cb) {
-		this._postToEditor({
-			method: 'setCentralData',
-			payload: dataObj
-		}, cb);
-	};
-
-	window.parent.postMessage({
-		method: 'handShake',
-		origin: window.location.origin
-	}, '*');
 };
 
-if (typeof(window) === 'object') {
-	window.sfdc = window.sfdc || {};
-	window.sfdc.BlockSDK = SDK;
+
+let defaultContent ="<table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td style='background-repeat:no-repeat;' background='http://image.s4.exct.net/lib/fe8f15737c62077a76/m/1/a9836fc9-54dc-434a-a09f-2b2ca88ce146.png' bgcolor='#ffffff' width='600' height='400' valign='top'> <!--[if gte mso 9]> <v:rect xmlns:v='urn:schemas-microsoft-com:vml' fill='true' stroke='false' style='background-repeat:no-repeat; width:600px;height:400px;'> <v:fill type='tile' src='http://image.s4.exct.net/lib/fe8f15737c62077a76/m/1/a9836fc9-54dc-434a-a09f-2b2ca88ce146.png' color='#ffffff' /> <v:textbox inset='0,0,0,0'> <![endif]--> <div> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td width='30' align='left' valign='top' style='font-size: 0%;'></td> <td align='left' valign='top'><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td align='left' valign='top' style='padding-top: 95px;color: #000000; padding-left: 100px; padding-right: 100px; font-size: 48px;'><center>Text Over Image</center></td> </tr> </tbody> </table></td> <td width='30' align='left' valign='top' style='font-size: 0%;'></td> </tr> </tbody> </table> </div> <!--[if gte mso 9]> </v:textbox> </v:rect> <![endif]--> </td> </tr> </tbody> </table>";
+
+let saveData = () => {
+	
+    imgData.ImgHeight = document.getElementById('ImgHeight').value;
+    imgData.ImageURL = document.getElementById('ImageURL').value;
+    imgData.Text = document.getElementById('Text').value;
+	imgData.Textcolor = document.getElementById('Textcolor').value;
+	
+
+
+
+    sdk.setData(imgData, (data) => {
+        
+		
+		 let content = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td style='background-repeat:no-repeat;' background='" + imgData.ImageURL + "' bgcolor='#ffffff' width='600' height='" + imgData.ImgHeight + "' valign='top'> <!--[if gte mso 9]> <v:rect xmlns:v='urn:schemas-microsoft-com:vml' fill='true' stroke='false' style='background-repeat:no-repeat; width:600px;height:" + imgData.ImgHeight + "px;'> <v:fill type='tile' src='" + imgData.ImageURL + "' color='#ffffff' /> <v:textbox inset='0,0,0,0'> <![endif]--> <div> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td width='30' align='left' valign='top' style='font-size: 0%;' class='mobile-hidden'></td> <td align='left' valign='top'><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td align='left' valign='top' style='padding-top: 95px;color: " + imgData.Textcolor + "; padding-left: 100px; padding-right: 100px; font-size: 48px;'><center>" + imgData.Text + "</center></td> </tr> </tbody> </table></td> <td width='30' align='left' valign='top' style='font-size: 0%;'></td> </tr> </tbody> </table> </div> <!--[if gte mso 9]> </v:textbox> </v:rect> <![endif]--> </td> </tr> </tbody> </table>";
+
+        
+
+        //check for ampscript
+        if (content.search('%%') != -1) {
+            sdk.setSuperContent(defaultContent, (newSuperContent) => {});
+            // content = defaultContent;
+        }
+        sdk.setContent(content);
+    });
+
+    console.log(JSON.stringify(imgData));
 }
-if (typeof(module) === 'object') {
-	module.exports = SDK;
+
+let fetchData = () => {
+
+    // console.log('Loading data...');
+
+    sdk.getData((data) => {
+        if (Object.keys(data).length > 0) {
+            imgData = data;
+         
+			
+	document.getElementById('ImgHeight').value = imgData.ImgHeight;
+      document.getElementById('ImageURL').value = imgData.ImageURL;
+    document.getElementById('Text').value = imgData.Text;
+	document.getElementById('Textcolor').value = imgData.Textcolor;
+	
+			
+			
+     
+        }
+    });
+
+    console.log(JSON.stringify(imgData));
 }
+//sdk.defaultContent(defaultContent);
+
+sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
+
+window.onload = fetchData;
+window.onchange = saveData;
+
+
