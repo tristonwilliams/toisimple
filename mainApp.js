@@ -58,15 +58,10 @@ let fetchData = () => {
       document.getElementById('ImageURL').value = imgData.ImageURL;
     document.getElementById('Text').value = imgData.Text;
 	document.getElementById('Textcolor').value = imgData.Textcolor;
-	
-			
 			
      
         }
-		else{
-		sdk.setContent(defaultContent);
 		
-		}
     });
 
     console.log(JSON.stringify(imgData));
