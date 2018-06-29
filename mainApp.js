@@ -63,15 +63,18 @@ let fetchData = () => {
 			
      
         }
+		else{
+		sdk.setContent(defaultContent);
+		
+		};
     });
 
     console.log(JSON.stringify(imgData));
 }
-//sdk.defaultContent(defaultContent);
 
-//sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
 
 window.onload = fetchData;
 window.onchange = saveData;
+
 
 
