@@ -67,7 +67,7 @@ let fetchData = () => {
 
     console.log(JSON.stringify(imgData));
 }
-sdk.defaultContent(defaultContent);
+//sdk.defaultContent(defaultContent);
 
 //sdk.setSuperContent(defaultContent, (newSuperContent) => { defaultContent = newSuperContent;});
 
