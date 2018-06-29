@@ -27,7 +27,7 @@ let saveData = () => {
 
 
 
-    sdk.setData(mapData, (data) => {
+    sdk.setData(imgData, (data) => {
         
 		
 		 let content = "<table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td style='background-repeat:no-repeat;' background='" + imgData.ImageURL + "' bgcolor='#ffffff' width='600' height='" + imgData.ImgHeight + "' valign='top'> <!--[if gte mso 9]> <v:rect xmlns:v='urn:schemas-microsoft-com:vml' fill='true' stroke='false' style='background-repeat:no-repeat; width:600px;height:" + imgData.ImgHeight + "px;'> <v:fill type='tile' src='" + imgData.ImageURL + "' color='#ffffff' /> <v:textbox inset='0,0,0,0'> <![endif]--> <div> <table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td width='30' align='left' valign='top' style='font-size: 0%;' class='mobile-hidden'></td> <td align='left' valign='top'><table width='100%' border='0' cellspacing='0' cellpadding='0'> <tbody> <tr> <td align='left' valign='top' style='padding-top: 95px;color: " + imgData.Textcolor + "; padding-left: 100px; padding-right: 100px; font-size: 48px;'><center>" + imgData.Text + "</center></td> </tr> </tbody> </table></td> <td width='30' align='left' valign='top' style='font-size: 0%;'></td> </tr> </tbody> </table> </div> <!--[if gte mso 9]> </v:textbox> </v:rect> <![endif]--> </td> </tr> </tbody> </table>";
@@ -42,7 +42,7 @@ let saveData = () => {
         sdk.setContent(content);
     });
 
-    console.log(JSON.stringify(mapData));
+    console.log(JSON.stringify(imgData));
 }
 
 let fetchData = () => {
@@ -51,10 +51,10 @@ let fetchData = () => {
 
     sdk.getData((data) => {
         if (Object.keys(data).length > 0) {
-            mapData = data;
+            imgData = data;
          
 			
-			document.getElementById('ImgHeight').value = imgData.ImgHeight;
+	document.getElementById('ImgHeight').value = imgData.ImgHeight;
       document.getElementById('ImageURL').value = imgData.ImageURL;
     document.getElementById('Text').value = imgData.Text;
 	document.getElementById('Textcolor').value = imgData.Textcolor;
@@ -65,7 +65,7 @@ let fetchData = () => {
         }
     });
 
-    console.log(JSON.stringify(mapData));
+    console.log(JSON.stringify(imgData));
 }
 
 //sdk.setContent(defaultContent);
